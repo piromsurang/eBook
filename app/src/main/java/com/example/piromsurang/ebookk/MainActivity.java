@@ -61,7 +61,6 @@ public class MainActivity extends AppCompatActivity implements BookView {
             @Override
             public void afterTextChanged(Editable s) {
                 presenter.searchByTitle(s.toString());
-                System.out.println(s.toString());
             }
         });
     }
