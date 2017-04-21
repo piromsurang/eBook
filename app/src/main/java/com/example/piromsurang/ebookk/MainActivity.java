@@ -2,7 +2,10 @@ package com.example.piromsurang.ebookk;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -26,6 +29,7 @@ public class MainActivity extends AppCompatActivity implements BookView {
         presenter = new BookPresenter(repository, this);
         repository.addObserver(presenter);
         repository.loadData();
+        initializeEditText();
     }
 //
 //    @Override
@@ -39,5 +43,25 @@ public class MainActivity extends AppCompatActivity implements BookView {
         ArrayAdapter<Book> adapter = new ArrayAdapter<Book>(this, android.R.layout.simple_list_item_1, books );
         ListView listView = (ListView) findViewById(R.id.show_list_listview);
         listView.setAdapter(adapter);
+    }
+
+    public void initializeEditText() {
+        EditText editText = (EditText) findViewById(R.id.search_edit_text);
+        editText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                System.out.println(s.toString());
+            }
+        });
     }
 }

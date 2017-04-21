@@ -8,16 +8,25 @@
     android:orientation="vertical"
     tools:context="com.example.piromsurang.ebookk.MainActivity">
 
+    <EditText
+        android:id="@+id/search_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="insert a title of the book here..."
+        />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="List of Books" />
+
 
     <ListView
         android:id="@+id/show_list_listview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"></ListView>
 
+    //for testing phase 0
     <TextView
         android:id="@+id/show_list_textview"
         android:layout_width="match_parent"
