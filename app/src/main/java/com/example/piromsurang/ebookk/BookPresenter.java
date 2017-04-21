@@ -26,23 +26,31 @@ public class BookPresenter implements Observer {
     }
 
 
-    public void displayList() {
-        books = repository.getBookList();
-        view.displayList(books);
+    public void displayList(ArrayList<Book> b) {
+        view.displayList(b);
     }
 
-    public String getInfo() {
-        books = repository.getBookList();
-        String text = "";
-        for( int i = 0 ; i < books.size() ; i++ ) {
-            text += "Title: " + books.get(i).getTitle() + " Price: " + books.get(i).getPrice() + "\n";
+//    public String getInfo() {
+//        books = repository.getBookList();
+//        String text = "";
+//        for( int i = 0 ; i < books.size() ; i++ ) {
+//            text += "Title: " + books.get(i).getTitle() + " Price: " + books.get(i).getPrice() + "\n";
+//        }
+//        return text;
+//    }
+
+    public void searchByTitle(String t) {
+        if( t.length() == 0 ) {
+            view.displayList(repository.getBookList());
         }
-        return text;
+        else {
+            view.displayList(repository.searchByTitle(t));
+        }
     }
 
     @Override
     public void update(Observable o, Object arg) {
-        displayList();
+        displayList(repository.getBookList());
         System.out.println("updating data...");
     }
 }

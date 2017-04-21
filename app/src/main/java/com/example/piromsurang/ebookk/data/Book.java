@@ -1,5 +1,7 @@
 package com.example.piromsurang.ebookk.data;
 
+import android.support.annotation.NonNull;
+
 /**
  * Created by Piromsurang on 4/20/2017 AD.
  */
@@ -59,4 +61,5 @@ public class Book {
     public String toString() {
         return "Title: " + title + "\nPrice: " + price + "\n";
     }
+
 }

@@ -1,5 +1,7 @@
 package com.example.piromsurang.ebookk.data;
 
+import android.widget.ArrayAdapter;
+
 import java.util.ArrayList;
 import java.util.Observable;
 
@@ -37,5 +39,10 @@ public class MockUpBookRepository extends Observable implements Repository {
         System.out.println("Finish downloading data...");
         setChanged();
         notifyObservers();
+    }
+
+    @Override
+    public ArrayList<Book> searchByTitle(String t) {
+        return books;
     }
 }

@@ -12,6 +12,9 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 import java.util.Observable;
 
 /**
@@ -21,10 +24,12 @@ import java.util.Observable;
 public class RealBookRepository extends Observable implements Repository {
 
     private ArrayList<Book> books;
+    private ArrayList<Book> searchedBooks;
     private static RealBookRepository instance;
 
     public RealBookRepository() {
         books = new ArrayList<>();
+        searchedBooks = new ArrayList<>();
     }
 
     public static RealBookRepository getInstance() {
@@ -42,6 +47,25 @@ public class RealBookRepository extends Observable implements Repository {
     public void loadData() {
         BookFetcherTask task = new BookFetcherTask();
         task.execute();
+    }
+
+    @Override
+    public ArrayList<Book> searchByTitle(String t) {
+        searchedBooks.clear();
+        for (Book b : books) {
+            if( b.getTitle().substring(0, t.length()).equalsIgnoreCase(t)) {
+                searchedBooks.add(b);
+            }
+        }
+
+        Collections.sort(searchedBooks, new Comparator<Book>() {
+            @Override
+            public int compare(Book one, Book other) {
+                return one.getTitle().compareTo(other.getTitle());
+            }
+        });
+
+        return searchedBooks;
     }
 
     public class BookFetcherTask extends AsyncTask<Void, Void, ArrayList<Book> > {
