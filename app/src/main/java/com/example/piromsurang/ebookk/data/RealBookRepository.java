@@ -68,6 +68,24 @@ public class RealBookRepository extends Observable implements Repository {
         return searchedBooks;
     }
 
+    @Override
+    public ArrayList<Book> searchByPublishedYear(String t) {
+        searchedBooks.clear();
+        for(Book b : books) {
+            if( b.getPub_year().substring(0, t.length()).equalsIgnoreCase(t)) {
+                searchedBooks.add(b);
+            }
+        }
+
+        Collections.sort(searchedBooks, new Comparator<Book>() {
+            @Override
+            public int compare(Book one, Book other) {
+                return one.getPub_year().compareTo(other.getPub_year());
+            }
+        });
+        return searchedBooks;
+    }
+
     public class BookFetcherTask extends AsyncTask<Void, Void, ArrayList<Book> > {
 
         @Override

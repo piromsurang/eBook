@@ -16,13 +16,17 @@ import java.util.Observer;
 
 public class BookPresenter implements Observer {
 
-    ArrayList<Book> books;
-    RealBookRepository repository;
-    BookView view;
+    private ArrayList<Book> books;
+    private RealBookRepository repository;
+    private BookView view;
+    private int checkRadioButton;
+    private final int SEARCH_BY_TITLE = 1;
+    private final int SEARCH_BY_PUBYEAR = 2;
 
     public BookPresenter( RealBookRepository repository, BookView view ) {
         this.repository = repository;
         this.view = view;
+        checkRadioButton = SEARCH_BY_TITLE;
     }
 
 
@@ -46,6 +50,26 @@ public class BookPresenter implements Observer {
         else {
             view.displayList(repository.searchByTitle(t));
         }
+    }
+
+    public void searchByPublishedYear(String t ) {
+        if( t.length() == 0 ) {
+            view.displayList(repository.getBookList());
+        } else {
+            view.displayList(repository.searchByPublishedYear(t));
+        }
+    }
+
+    public void searchBy(String t) {
+        if( checkRadioButton == SEARCH_BY_TITLE ) {
+            searchByTitle(t);
+        } else if( checkRadioButton == SEARCH_BY_PUBYEAR ) {
+            searchByPublishedYear(t);
+        }
+    }
+
+    public void onCheckRadioButton(int checked) {
+        checkRadioButton = checked;
     }
 
     @Override

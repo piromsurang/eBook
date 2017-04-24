@@ -9,4 +9,5 @@ import java.util.ArrayList;
 public interface Repository {
     void loadData();
     ArrayList<Book> searchByTitle(String t);
+    ArrayList<Book> searchByPublishedYear(String t);
 }

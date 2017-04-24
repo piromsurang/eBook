@@ -59,7 +59,7 @@ public class Book {
     public void setPub_year(String pub_year) { this.pub_year = pub_year; }
 
     public String toString() {
-        return "Title: " + title + "\nPrice: " + price + "\n";
+        return "Title: " + title + "\nPublished Year: " + pub_year + "\nPrice: " + price + "\n";
     }
 
 }
