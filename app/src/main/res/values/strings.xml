@@ -4,4 +4,10 @@
     <string name="search_by">Search By : </string>
     <string name="title">Title</string>
     <string name="pub_year">Published Year</string>
+    <string-array name="account_array">
+        <item>Account</item>
+        <item>Check Fund</item>
+        <item>Add Fund</item>
+    </string-array>
+
 </resources>

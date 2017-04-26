@@ -10,6 +10,8 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Spinner;
+import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 
 import com.example.piromsurang.ebookk.data.Book;
@@ -34,15 +36,17 @@ public class MainActivity extends AppCompatActivity implements BookView {
         presenter = new BookPresenter(repository, this);
         repository.addObserver(presenter);
         repository.loadData();
+        initializeSpinner();
         initializeRadioButton();
         initializeEditText();
     }
-//
-//    @Override
-//    public void displayList(String text) {
-//        TextView textView = (TextView) findViewById(R.id.show_list_textview);
-//        textView.setText(text);
-//    }
+
+    public void initializeSpinner() {
+        Spinner spinner = (Spinner) findViewById(R.id.account_spinner);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.account_array, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+    }
 
     @Override
     public void displayList(ArrayList<Book> books) {
