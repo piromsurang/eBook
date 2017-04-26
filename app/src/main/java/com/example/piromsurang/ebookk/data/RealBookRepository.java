@@ -100,7 +100,7 @@ public class RealBookRepository extends Observable implements Repository {
 
                 for (int i = 0; i < dataArray.length(); i++) {
                     JSONObject bookJson = dataArray.getJSONObject(i);
-                    Book book = new Book(bookJson.getDouble("prize"),
+                    Book book = new Book(bookJson.getDouble("price"),
                             bookJson.getString("img_url"), bookJson.getString("id"),
                             bookJson.getString("title"), bookJson.getString("pub_year"));
                     results.add(book);
