@@ -18,7 +18,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".data.AddMoneyActivity"></activity>
+        <activity android:name=".data.AddMoneyActivity" />
+        <activity android:name=".CartActivity"></activity>
     </application>
 
 </manifest>

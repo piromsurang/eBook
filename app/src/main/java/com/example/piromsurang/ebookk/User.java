@@ -2,17 +2,29 @@ package com.example.piromsurang.ebookk;
 
 import com.example.piromsurang.ebookk.data.Book;
 
+import java.io.Serializable;
+
 /**
  * Created by Piromsurang on 4/27/2017 AD.
  */
 
-public class User {
+public class User implements Serializable {
+    private long serialVersionUID = 10L;
     private String id;
     private String name;
     private double money;
     private Cart cart;
 
-    public User(String id, String name) {
+    private static User instance;
+
+    public static User getInstance() {
+        if(instance == null) {
+            instance = new User("10", "Gift");
+        }
+        return instance;
+    }
+
+    private User(String id, String name) {
         this.id = id;
         this.name = name;
         money = 0;
@@ -62,5 +74,9 @@ public class User {
 
     public void emptyCart() {
         cart.clearCart();
+    }
+
+    public Cart getCart() {
+        return cart;
     }
 }

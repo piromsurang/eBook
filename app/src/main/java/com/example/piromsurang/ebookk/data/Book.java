@@ -2,11 +2,13 @@ package com.example.piromsurang.ebookk.data;
 
 import android.support.annotation.NonNull;
 
+import java.io.Serializable;
+
 /**
  * Created by Piromsurang on 4/20/2017 AD.
  */
 
-public class Book {
+public class Book implements Serializable{
 
     private double price;
     private String img_url;

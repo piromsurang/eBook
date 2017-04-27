@@ -2,13 +2,14 @@ package com.example.piromsurang.ebookk;
 
 import com.example.piromsurang.ebookk.data.Book;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Created by Piromsurang on 4/27/2017 AD.
  */
 
-public class Cart {
+public class Cart implements Serializable{
     ArrayList<Book> selectedBooks;
 
     public Cart() {
@@ -25,5 +26,9 @@ public class Cart {
 
     public void clearCart() {
         selectedBooks.clear();
+    }
+
+    public ArrayList<Book> getSelectedBooks() {
+        return selectedBooks;
     }
 }

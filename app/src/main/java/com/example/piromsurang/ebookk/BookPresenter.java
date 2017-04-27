@@ -6,6 +6,7 @@ import com.example.piromsurang.ebookk.data.Book;
 import com.example.piromsurang.ebookk.data.MockUpBookRepository;
 import com.example.piromsurang.ebookk.data.RealBookRepository;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
@@ -29,7 +30,7 @@ public class BookPresenter implements Observer {
         this.repository = repository;
         this.view = view;
         checkRadioButton = SEARCH_BY_TITLE;
-        user = new User("10", "Gift");
+        user = User.getInstance();
     }
 
 

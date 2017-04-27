@@ -8,6 +8,7 @@
         <item>Account</item>
         <item>Check Fund</item>
         <item>Add Fund</item>
+        <item>Cart</item>
     </string-array>
     <string name="money">Money</string>
     <string name="dismiss">Dismiss</string>
@@ -15,4 +16,7 @@
     <string name="amount">Amount</string>
     <string name="insert_amount">insert amount of money</string>
     <string name="submit">SUMMIT</string>
+    <string name="cart">Cart</string>
+    <string name="proceed_checkout">CHECKOUT</string>
+    <string name="cancel">CANCEL</string>
 </resources>

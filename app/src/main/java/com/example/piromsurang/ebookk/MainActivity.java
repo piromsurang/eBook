@@ -31,6 +31,7 @@ import com.example.piromsurang.ebookk.data.Book;
 import com.example.piromsurang.ebookk.data.MockUpBookRepository;
 import com.example.piromsurang.ebookk.data.RealBookRepository;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements BookView {
@@ -44,8 +45,11 @@ public class MainActivity extends AppCompatActivity implements BookView {
     private final int SEARCH_BY_PUBYEAR = 2;
     private final String CHECK_FUND = "Check Fund";
     private final String ADD_FUND = "Add Fund";
+    private final String CART = "Cart";
     private final String AMOUNT_ADD_FUND = "adding_fund_amount_key";
     private final int ADDING_FUND_REQUEST = 1;
+    private final int SHOW_CART_REQUEST = 2;
+    public static final String SERIAL_USER = "USER";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,8 +68,9 @@ public class MainActivity extends AppCompatActivity implements BookView {
     @Override
     public void displayList(ArrayList<Book> books) {
         ArrayAdapter<Book> adapter = new ArrayAdapter<Book>(this, android.R.layout.simple_list_item_1, books );
+        CustomAdapter customAdapter = new CustomAdapter(books, presenter, this);
         ListView listView = (ListView) findViewById(R.id.show_list_listview);
-        listView.setAdapter(adapter);
+        listView.setAdapter(customAdapter);
     }
 
     public void initializeSpinner() {
@@ -81,6 +86,8 @@ public class MainActivity extends AppCompatActivity implements BookView {
                     initializePopupWindow(view);
                 } else if(selectedItem.contains(ADD_FUND)) {
                     startAddingFund();
+                } else if(selectedItem.contains(CART)) {
+                    startCartActivity();
                 }
                 parent.setSelection(0);
             }
@@ -160,5 +167,12 @@ public class MainActivity extends AppCompatActivity implements BookView {
                 presenter.addMoneyToUser(amount);
             }
         }
+    }
+
+    public void startCartActivity() {
+        Intent cartIntent = new Intent(this, CartActivity.class);
+        cartIntent.putExtra(SERIAL_USER, presenter.getUser());
+        System.out.println(presenter.getUser().getCart().getSelectedBooks().size());
+        startActivityForResult(cartIntent, SHOW_CART_REQUEST);
     }
 }
