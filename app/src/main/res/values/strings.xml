@@ -19,4 +19,6 @@
     <string name="cart">Cart</string>
     <string name="proceed_checkout">CHECKOUT</string>
     <string name="cancel">CANCEL</string>
+    <string name="delete">DELETE</string>
+    <string name="total">Total : </string>
 </resources>

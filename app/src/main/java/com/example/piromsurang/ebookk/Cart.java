@@ -9,7 +9,8 @@ import java.util.ArrayList;
  * Created by Piromsurang on 4/27/2017 AD.
  */
 
-public class Cart implements Serializable{
+public class Cart implements Serializable {
+
     ArrayList<Book> selectedBooks;
 
     public Cart() {
@@ -30,5 +31,13 @@ public class Cart implements Serializable{
 
     public ArrayList<Book> getSelectedBooks() {
         return selectedBooks;
+    }
+
+    public double getTotal() {
+        double sum = 0;
+        for(Book b : selectedBooks) {
+            sum += b.getPrice();
+        }
+        return sum;
     }
 }

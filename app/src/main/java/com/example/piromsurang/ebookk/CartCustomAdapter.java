@@ -21,12 +21,12 @@ public class CartCustomAdapter extends BaseAdapter implements ListAdapter {
 
     private ArrayList<Book> list = new ArrayList<>();
     private Context context;
-    private User user;
+    private BookPresenter presenter;
 
-    public CartCustomAdapter(ArrayList<Book> list, User user, Context context) {
+    public CartCustomAdapter(ArrayList<Book> list, BookPresenter presenter, Context context) {
         this.list = list;
-        this.user = user;
         this.context = context;
+        this.presenter = presenter;
     }
 
     @Override
@@ -49,7 +49,7 @@ public class CartCustomAdapter extends BaseAdapter implements ListAdapter {
         View view = convertView;
         if (view == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            view = inflater.inflate(R.layout.showcart_layout, null);
+            view = inflater.inflate(R.layout.cart_listview_adapter, null);
         }
 
         //Handle TextView and display string from your list
@@ -62,7 +62,8 @@ public class CartCustomAdapter extends BaseAdapter implements ListAdapter {
         addBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                user.removeFromCart(list.get(position));
+                presenter.getUser().removeFromCart(list.get(position));
+                presenter.displayList(list);
             }
         });
 

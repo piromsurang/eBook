@@ -45,6 +45,28 @@
 
     <LinearLayout
         android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.00">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/total"
+            tools:ignore="NestedWeights"
+            android:textAlignment="center"/>
+
+        <TextView
+            android:id="@+id/show_total_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_weight="2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -53,9 +75,10 @@
             android:id="@+id/cancel_cart_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:onClick="cancel"
             android:text="@string/cancel"
-            android:layout_weight="1"/>
+            tools:ignore="ButtonStyle,NestedWeights" />
 
         <Button
             android:id="@+id/process_checkout_button"
@@ -63,7 +86,8 @@
             android:layout_height="wrap_content"
             android:text="@string/proceed_checkout"
             android:onClick="proceedCheckout"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            tools:ignore="ButtonStyle" />
 
     </LinearLayout>
 

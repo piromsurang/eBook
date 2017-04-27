@@ -23,8 +23,8 @@ public class BookPresenter implements Observer {
     private int checkRadioButton;
     private User user;
 
-    private final int SEARCH_BY_TITLE = 1;
-    private final int SEARCH_BY_PUBYEAR = 2;
+    public static final int SEARCH_BY_TITLE = 1;
+    public static final int SEARCH_BY_PUBYEAR = 2;
 
     public BookPresenter( RealBookRepository repository, BookView view ) {
         this.repository = repository;
@@ -75,6 +75,10 @@ public class BookPresenter implements Observer {
 
     public User getUser() {
         return user;
+    }
+
+    public double getTotal() {
+        return user.getCart().getTotal();
     }
 
     public void addMoneyToUser(double amount) {

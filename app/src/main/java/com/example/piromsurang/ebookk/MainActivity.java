@@ -34,6 +34,9 @@ import com.example.piromsurang.ebookk.data.RealBookRepository;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import static com.example.piromsurang.ebookk.BookPresenter.SEARCH_BY_PUBYEAR;
+import static com.example.piromsurang.ebookk.BookPresenter.SEARCH_BY_TITLE;
+
 public class MainActivity extends AppCompatActivity implements BookView {
 
     private BookPresenter presenter;
@@ -41,15 +44,12 @@ public class MainActivity extends AppCompatActivity implements BookView {
     private PopupWindow popupWindow;
     private LayoutInflater layoutInflater;
 
-    private final int SEARCH_BY_TITLE = 1;
-    private final int SEARCH_BY_PUBYEAR = 2;
     private final String CHECK_FUND = "Check Fund";
     private final String ADD_FUND = "Add Fund";
     private final String CART = "Cart";
-    private final String AMOUNT_ADD_FUND = "adding_fund_amount_key";
-    private final int ADDING_FUND_REQUEST = 1;
-    private final int SHOW_CART_REQUEST = 2;
-    public static final String SERIAL_USER = "USER";
+    public static final String AMOUNT_ADD_FUND = "adding_fund_amount_key";
+    public static final int ADDING_FUND_REQUEST = 1;
+    public static final int SHOW_CART_REQUEST = 2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -171,8 +171,6 @@ public class MainActivity extends AppCompatActivity implements BookView {
 
     public void startCartActivity() {
         Intent cartIntent = new Intent(this, CartActivity.class);
-        cartIntent.putExtra(SERIAL_USER, presenter.getUser());
-        System.out.println(presenter.getUser().getCart().getSelectedBooks().size());
         startActivityForResult(cartIntent, SHOW_CART_REQUEST);
     }
 }
