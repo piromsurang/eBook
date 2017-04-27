@@ -6,10 +6,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.TextView;
 
 import com.example.piromsurang.ebookk.data.Book;
+import com.example.piromsurang.ebookk.data.RealBookRepository;
 
 import java.util.ArrayList;
 
@@ -55,6 +57,9 @@ public class CartCustomAdapter extends BaseAdapter implements ListAdapter {
         //Handle TextView and display string from your list
         TextView listItemText = (TextView)view.findViewById(R.id.list_item_string_cart);
         listItemText.setText(list.get(position).toString());
+        ImageView imageView = (ImageView) view.findViewById(R.id.imageview_cart);
+        imageView.setImageBitmap(RealBookRepository.getInstance().getBitmaps().get(position));
+
 
         //Handle buttons and add onClickListeners
         Button addBtn = (Button)view.findViewById(R.id.delete_btn);

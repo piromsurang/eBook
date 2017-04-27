@@ -1,15 +1,18 @@
 package com.example.piromsurang.ebookk;
 
 import android.content.Context;
+import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.TextView;
 
 import com.example.piromsurang.ebookk.data.Book;
+import com.example.piromsurang.ebookk.data.RealBookRepository;
 
 import java.util.ArrayList;
 
@@ -53,8 +56,10 @@ public class CustomAdapter extends BaseAdapter implements ListAdapter {
         }
 
         //Handle TextView and display string from your list
-        TextView listItemText = (TextView)view.findViewById(R.id.list_item_string);
+        TextView listItemText = (TextView) view.findViewById(R.id.list_item_string);
         listItemText.setText(list.get(position).toString());
+        ImageView imageView = (ImageView) view.findViewById(R.id.imageview_main);
+        imageView.setImageBitmap(RealBookRepository.getInstance().getBitmaps().get(position));
 
         //Handle buttons and add onClickListeners
         Button addBtn = (Button)view.findViewById(R.id.add_btn);

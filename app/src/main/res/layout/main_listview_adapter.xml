@@ -23,5 +23,12 @@
         android:layout_marginRight="10dp"
         android:text="Add" />
 
+    <ImageView
+        android:id="@+id/imageview_main"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/add_btn"
+        android:layout_centerInParent="true"/>
+
 
 </RelativeLayout>

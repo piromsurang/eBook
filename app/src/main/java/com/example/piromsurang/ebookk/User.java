@@ -1,8 +1,11 @@
 package com.example.piromsurang.ebookk;
 
+import android.graphics.Bitmap;
+
 import com.example.piromsurang.ebookk.data.Book;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 /**
  * Created by Piromsurang on 4/27/2017 AD.

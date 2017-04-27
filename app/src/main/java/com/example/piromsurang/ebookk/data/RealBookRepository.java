@@ -1,6 +1,10 @@
 package com.example.piromsurang.ebookk.data;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
+import android.util.Log;
+import android.widget.ImageView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -8,6 +12,7 @@ import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
@@ -17,6 +22,9 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Observable;
 
+import static com.example.piromsurang.ebookk.R.layout.activity_main;
+import static com.example.piromsurang.ebookk.R.layout.main_listview_adapter;
+
 /**
  * Created by Piromsurang on 4/21/2017 AD.
  */
@@ -25,11 +33,17 @@ public class RealBookRepository extends Observable implements Repository {
 
     private ArrayList<Book> books;
     private ArrayList<Book> searchedBooks;
+    private ArrayList<Bitmap> bitmaps;
     private static RealBookRepository instance;
 
     public RealBookRepository() {
         books = new ArrayList<>();
         searchedBooks = new ArrayList<>();
+        bitmaps = new ArrayList<>();
+    }
+
+    public ArrayList<Bitmap> getBitmaps() {
+        return bitmaps;
     }
 
     public static RealBookRepository getInstance() {
@@ -137,6 +151,7 @@ public class RealBookRepository extends Observable implements Repository {
                 books.clear();
                 for (Book t : results) {
                     books.add(t);
+                    bitmaps.add(t.getBitmap());
                 }
                 setChanged();
                 notifyObservers();

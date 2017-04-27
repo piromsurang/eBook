@@ -12,9 +12,11 @@ import java.util.ArrayList;
 public class Cart implements Serializable {
 
     ArrayList<Book> selectedBooks;
+    ArrayList<Book> history;
 
     public Cart() {
         selectedBooks = new ArrayList<>();
+        history = new ArrayList<>();
     }
 
     public void addCart(Book b) {
@@ -27,6 +29,7 @@ public class Cart implements Serializable {
 
     public void clearCart() {
         selectedBooks.clear();
+        history.addAll(selectedBooks);
     }
 
     public ArrayList<Book> getSelectedBooks() {

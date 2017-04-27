@@ -1,8 +1,14 @@
 package com.example.piromsurang.ebookk.data;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.annotation.NonNull;
+import android.widget.ImageView;
 
+import java.io.IOException;
 import java.io.Serializable;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 /**
  * Created by Piromsurang on 4/20/2017 AD.
@@ -15,6 +21,7 @@ public class Book implements Serializable{
     private String id;
     private String title;
     private String pub_year;
+    private Bitmap bitmap;
 
     public Book( double price, String img_url, String id, String title, String pub_year ) {
         this.price = price;
@@ -22,6 +29,25 @@ public class Book implements Serializable{
         this.id = id;
         this.title = title;
         this.pub_year = pub_year;
+        downloadImage();
+    }
+
+    public void downloadImage() {
+        URL url = null;
+        try {
+            url = new URL(img_url);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        try {
+            bitmap = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public Bitmap getBitmap() {
+        return bitmap;
     }
 
     public String getPub_year() { return pub_year; }
