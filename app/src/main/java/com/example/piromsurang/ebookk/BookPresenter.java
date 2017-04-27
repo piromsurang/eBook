@@ -34,15 +34,6 @@ public class BookPresenter implements Observer {
         view.displayList(b);
     }
 
-//    public String getInfo() {
-//        books = repository.getBookList();
-//        String text = "";
-//        for( int i = 0 ; i < books.size() ; i++ ) {
-//            text += "Title: " + books.get(i).getTitle() + " Price: " + books.get(i).getPrice() + "\n";
-//        }
-//        return text;
-//    }
-
     public void searchByTitle(String t) {
         if( t.length() == 0 ) {
             view.displayList(repository.getBookList());

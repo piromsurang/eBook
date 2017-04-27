@@ -9,5 +9,7 @@
         <item>Check Fund</item>
         <item>Add Fund</item>
     </string-array>
+    <string name="money">Money</string>
+    <string name="dismiss">Dismiss</string>
 
 </resources>

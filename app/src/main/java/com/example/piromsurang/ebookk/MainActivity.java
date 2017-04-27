@@ -1,18 +1,29 @@
 package com.example.piromsurang.ebookk;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.PopupWindow;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 import android.widget.TextView;
+import android.view.ViewGroup.LayoutParams;
 
 import com.example.piromsurang.ebookk.data.Book;
 import com.example.piromsurang.ebookk.data.MockUpBookRepository;
@@ -24,8 +35,13 @@ public class MainActivity extends AppCompatActivity implements BookView {
 
     private BookPresenter presenter;
     private RealBookRepository repository;
+    private PopupWindow popupWindow;
+    private LayoutInflater layoutInflater;
+
     private final int SEARCH_BY_TITLE = 1;
     private final int SEARCH_BY_PUBYEAR = 2;
+    private final String CHECK_FUND = "Check Fund";
+    private final String ADD_FUND = "Add Fund";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,13 +57,6 @@ public class MainActivity extends AppCompatActivity implements BookView {
         initializeEditText();
     }
 
-    public void initializeSpinner() {
-        Spinner spinner = (Spinner) findViewById(R.id.account_spinner);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.account_array, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
-    }
-
     @Override
     public void displayList(ArrayList<Book> books) {
         ArrayAdapter<Book> adapter = new ArrayAdapter<Book>(this, android.R.layout.simple_list_item_1, books );
@@ -55,6 +64,28 @@ public class MainActivity extends AppCompatActivity implements BookView {
         listView.setAdapter(adapter);
     }
 
+    public void initializeSpinner() {
+        Spinner spinner = (Spinner) findViewById(R.id.account_spinner);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.account_array, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String selectedItem = parent.getItemAtPosition(position).toString();
+                if(selectedItem.contains(CHECK_FUND)) {
+                    initializePopupWindow(view);
+                } else if(selectedItem.contains(ADD_FUND)) {
+
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+    }
 
     public void initializeRadioButton() {
         RadioGroup radioGroup = (RadioGroup) findViewById(R.id.search_by_radiogroup);
@@ -95,5 +126,18 @@ public class MainActivity extends AppCompatActivity implements BookView {
             default:
                 System.out.println("error");
         }
+    }
+
+    public void initializePopupWindow(View view) {
+        AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
+        alertDialog.setTitle("Check Fund");
+        alertDialog.setMessage("1000");
+        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "DISMISS",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+        alertDialog.show();
     }
 }

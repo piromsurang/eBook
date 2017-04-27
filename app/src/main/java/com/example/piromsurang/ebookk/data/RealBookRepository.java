@@ -53,7 +53,7 @@ public class RealBookRepository extends Observable implements Repository {
     public ArrayList<Book> searchByTitle(String t) {
         searchedBooks.clear();
         for (Book b : books) {
-            if( b.getTitle().substring(0, t.length()).equalsIgnoreCase(t)) {
+            if( b.getTitle().contains(t)) {
                 searchedBooks.add(b);
             }
         }
@@ -70,6 +70,8 @@ public class RealBookRepository extends Observable implements Repository {
 
     @Override
     public ArrayList<Book> searchByPublishedYear(String t) {
+        //books.stream().filter().sorted().toArray(); Net suggested for new android version
+
         searchedBooks.clear();
         for(Book b : books) {
             if( b.getPub_year().substring(0, t.length()).equalsIgnoreCase(t)) {
