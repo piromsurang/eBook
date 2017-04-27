@@ -3,6 +3,7 @@ package com.example.piromsurang.ebookk;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -25,6 +26,7 @@ import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 import android.view.ViewGroup.LayoutParams;
 
+import com.example.piromsurang.ebookk.data.AddMoneyActivity;
 import com.example.piromsurang.ebookk.data.Book;
 import com.example.piromsurang.ebookk.data.MockUpBookRepository;
 import com.example.piromsurang.ebookk.data.RealBookRepository;
@@ -42,6 +44,8 @@ public class MainActivity extends AppCompatActivity implements BookView {
     private final int SEARCH_BY_PUBYEAR = 2;
     private final String CHECK_FUND = "Check Fund";
     private final String ADD_FUND = "Add Fund";
+    private final String AMOUNT_ADD_FUND = "adding_fund_amount_key";
+    private final int ADDING_FUND_REQUEST = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,8 +80,9 @@ public class MainActivity extends AppCompatActivity implements BookView {
                 if(selectedItem.contains(CHECK_FUND)) {
                     initializePopupWindow(view);
                 } else if(selectedItem.contains(ADD_FUND)) {
-
+                    startAddingFund();
                 }
+                parent.setSelection(0);
             }
 
             @Override
@@ -131,7 +136,8 @@ public class MainActivity extends AppCompatActivity implements BookView {
     public void initializePopupWindow(View view) {
         AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
         alertDialog.setTitle("Check Fund");
-        alertDialog.setMessage("1000");
+        String value = String.format("%.2f", presenter.getUser().getMoney());
+        alertDialog.setMessage(value);
         alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "DISMISS",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
@@ -139,5 +145,20 @@ public class MainActivity extends AppCompatActivity implements BookView {
                     }
                 });
         alertDialog.show();
+    }
+
+    public void startAddingFund() {
+        Intent addFundIntent = new Intent(this, AddMoneyActivity.class );
+        startActivityForResult(addFundIntent, ADDING_FUND_REQUEST);
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        if (requestCode == ADDING_FUND_REQUEST) {
+            if (resultCode == RESULT_OK) {
+                double amount = (double) data.getSerializableExtra(AMOUNT_ADD_FUND);
+                presenter.addMoneyToUser(amount);
+            }
+        }
     }
 }

@@ -20,6 +20,8 @@ public class BookPresenter implements Observer {
     private RealBookRepository repository;
     private BookView view;
     private int checkRadioButton;
+    private User user;
+
     private final int SEARCH_BY_TITLE = 1;
     private final int SEARCH_BY_PUBYEAR = 2;
 
@@ -27,6 +29,7 @@ public class BookPresenter implements Observer {
         this.repository = repository;
         this.view = view;
         checkRadioButton = SEARCH_BY_TITLE;
+        user = new User("10", "Gift");
     }
 
 
@@ -67,5 +70,13 @@ public class BookPresenter implements Observer {
     public void update(Observable o, Object arg) {
         displayList(repository.getBookList());
         System.out.println("updating data...");
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void addMoneyToUser(double amount) {
+        user.addMoney(amount);
     }
 }
