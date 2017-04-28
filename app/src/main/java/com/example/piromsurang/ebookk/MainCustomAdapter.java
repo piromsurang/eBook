@@ -20,13 +20,13 @@ import java.util.ArrayList;
  * Created by Piromsurang on 4/27/2017 AD.
  */
 
-public class CustomAdapter extends BaseAdapter implements ListAdapter {
+public class MainCustomAdapter extends BaseAdapter implements ListAdapter {
 
     private ArrayList<Book> list = new ArrayList<>();
     private Context context;
     private BookPresenter presenter;
 
-    public CustomAdapter(ArrayList<Book> list, BookPresenter presenter, Context context) {
+    public MainCustomAdapter(ArrayList<Book> list, BookPresenter presenter, Context context) {
         this.list = list;
         this.presenter = presenter;
         this.context = context;

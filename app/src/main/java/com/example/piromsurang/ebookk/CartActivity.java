@@ -46,31 +46,9 @@ public class CartActivity extends AppCompatActivity implements BookView {
     public void proceedCheckout(View view) {
 
         if(presenter.getUser().getMoney() < presenter.getTotal() ) {
-            AlertDialog alertDialog = new AlertDialog.Builder(CartActivity.this).create();
-            alertDialog.setTitle("Checkout Error");
-            alertDialog.setMessage("Sorry, you don't have enough money to checkout.");
-            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "DISMISS",
-                    new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
-                        }
-                    });
-            alertDialog.show();
+            presenter.createDialog(false);
         } else {
-            AlertDialog alertDialog = new AlertDialog.Builder(CartActivity.this).create();
-            alertDialog.setTitle("Checkout Completed");
-            alertDialog.setMessage("Thank you for purchased books with us.");
-            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "DISMISS",
-                    new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
-                            presenter.getUser().pay(presenter.getTotal());
-                            presenter.getUser().getCart().clearCart();
-                            initializeShowMoney();
-                            presenter.displayList(presenter.getUser().getCart().getSelectedBooks());
-                        }
-                    });
-            alertDialog.show();
+            presenter.createDialog(true);
         }
 
     }
@@ -82,6 +60,45 @@ public class CartActivity extends AppCompatActivity implements BookView {
     @Override
     public void displayList(ArrayList<Book> books) {
         initializeListview();
+    }
+
+    @Override
+    public void createDialog(boolean b) {
+        if(b) {
+            createAbleToProceedDialog();
+        } else {
+            createUnableToProceedDialog();
+        }
+    }
+
+    public void createUnableToProceedDialog() {
+        AlertDialog alertDialog = new AlertDialog.Builder(CartActivity.this).create();
+        alertDialog.setTitle("Checkout Error");
+        alertDialog.setMessage("Sorry, you don't have enough money to checkout.");
+        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "DISMISS",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+        alertDialog.show();
+    }
+
+    public void createAbleToProceedDialog() {
+        AlertDialog alertDialog = new AlertDialog.Builder(CartActivity.this).create();
+        alertDialog.setTitle("Checkout Completed");
+        alertDialog.setMessage("Thank you for purchased books with us.");
+        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "DISMISS",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                        presenter.getUser().pay(presenter.getTotal());
+                        presenter.getUser().emptyCart();
+                        initializeShowMoney();
+                        presenter.displayList(presenter.getUser().getCart().getSelectedBooks());
+                    }
+                });
+        alertDialog.show();
     }
 
     public void showTotal() {

@@ -1,5 +1,7 @@
 package com.example.piromsurang.ebookk;
 
+import android.os.CountDownTimer;
+
 import com.example.piromsurang.ebookk.data.Book;
 
 import java.io.Serializable;
@@ -28,8 +30,25 @@ public class Cart implements Serializable {
     }
 
     public void clearCart() {
-        selectedBooks.clear();
         history.addAll(selectedBooks);
+        selectedBooks.clear();
+        countDownRefundable();
+    }
+
+    public void countDownRefundable() {
+        for(final Book b : history ) {
+            b.setRefundable(true);
+            new CountDownTimer(300000, 1000) {
+
+                public void onTick(long millisUntilFinished) {
+
+                }
+
+                public void onFinish() {
+                    b.setRefundable(false);
+                }
+            }.start();
+        }
     }
 
     public ArrayList<Book> getSelectedBooks() {
@@ -42,5 +61,13 @@ public class Cart implements Serializable {
             sum += b.getPrice();
         }
         return sum;
+    }
+
+    public void refundBook(Book b) {
+        history.remove(b);
+    }
+
+    public ArrayList<Book> getHistory() {
+        return history;
     }
 }

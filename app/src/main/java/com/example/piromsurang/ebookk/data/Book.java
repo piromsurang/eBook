@@ -22,6 +22,7 @@ public class Book implements Serializable{
     private String title;
     private String pub_year;
     private Bitmap bitmap;
+    private boolean isRefundable;
 
     public Book( double price, String img_url, String id, String title, String pub_year ) {
         this.price = price;
@@ -29,7 +30,8 @@ public class Book implements Serializable{
         this.id = id;
         this.title = title;
         this.pub_year = pub_year;
-        downloadImage();
+        isRefundable = false;
+        //downloadImage();
     }
 
     public void downloadImage() {
@@ -44,6 +46,14 @@ public class Book implements Serializable{
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void setRefundable(boolean isRefundables) {
+        this.isRefundable = isRefundables;
+    }
+
+    public boolean isRefundable() {
+        return isRefundable;
     }
 
     public Bitmap getBitmap() {

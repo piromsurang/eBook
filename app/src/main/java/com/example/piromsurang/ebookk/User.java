@@ -82,4 +82,14 @@ public class User implements Serializable {
     public Cart getCart() {
         return cart;
     }
+
+    public boolean refundBook(Book b) {
+        if( b.isRefundable() ) {
+            cart.refundBook(b);
+            money += b.getPrice();
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

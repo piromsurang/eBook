@@ -1,37 +1,27 @@
 package com.example.piromsurang.ebookk;
 
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
-import android.widget.SpinnerAdapter;
-import android.widget.TextView;
-import android.view.ViewGroup.LayoutParams;
 
 import com.example.piromsurang.ebookk.data.AddMoneyActivity;
 import com.example.piromsurang.ebookk.data.Book;
-import com.example.piromsurang.ebookk.data.MockUpBookRepository;
 import com.example.piromsurang.ebookk.data.RealBookRepository;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
 import static com.example.piromsurang.ebookk.BookPresenter.SEARCH_BY_PUBYEAR;
@@ -47,9 +37,9 @@ public class MainActivity extends AppCompatActivity implements BookView {
     private final String CHECK_FUND = "Check Fund";
     private final String ADD_FUND = "Add Fund";
     private final String CART = "Cart";
+    private final String ORDER = "Orders";
     public static final String AMOUNT_ADD_FUND = "adding_fund_amount_key";
     public static final int ADDING_FUND_REQUEST = 1;
-    public static final int SHOW_CART_REQUEST = 2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,9 +58,24 @@ public class MainActivity extends AppCompatActivity implements BookView {
     @Override
     public void displayList(ArrayList<Book> books) {
         ArrayAdapter<Book> adapter = new ArrayAdapter<Book>(this, android.R.layout.simple_list_item_1, books );
-        CustomAdapter customAdapter = new CustomAdapter(books, presenter, this);
+        MainCustomAdapter mainCustomAdapter = new MainCustomAdapter(books, presenter, this);
         ListView listView = (ListView) findViewById(R.id.show_list_listview);
-        listView.setAdapter(customAdapter);
+        listView.setAdapter(mainCustomAdapter);
+    }
+
+    @Override
+    public void createDialog(boolean b) {
+        AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
+        alertDialog.setTitle("Check Fund");
+        String value = String.format("%.2f", presenter.getUser().getMoney());
+        alertDialog.setMessage(value);
+        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "DISMISS",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+        alertDialog.show();
     }
 
     public void initializeSpinner() {
@@ -83,11 +88,13 @@ public class MainActivity extends AppCompatActivity implements BookView {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String selectedItem = parent.getItemAtPosition(position).toString();
                 if(selectedItem.contains(CHECK_FUND)) {
-                    initializePopupWindow(view);
+                    presenter.createDialog(true);
                 } else if(selectedItem.contains(ADD_FUND)) {
                     startAddingFund();
                 } else if(selectedItem.contains(CART)) {
                     startCartActivity();
+                } else if(selectedItem.contains(ORDER)) {
+                    startOrdersActivity();
                 }
                 parent.setSelection(0);
             }
@@ -141,17 +148,7 @@ public class MainActivity extends AppCompatActivity implements BookView {
     }
 
     public void initializePopupWindow(View view) {
-        AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
-        alertDialog.setTitle("Check Fund");
-        String value = String.format("%.2f", presenter.getUser().getMoney());
-        alertDialog.setMessage(value);
-        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "DISMISS",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
-        alertDialog.show();
+
     }
 
     public void startAddingFund() {
@@ -171,6 +168,11 @@ public class MainActivity extends AppCompatActivity implements BookView {
 
     public void startCartActivity() {
         Intent cartIntent = new Intent(this, CartActivity.class);
-        startActivityForResult(cartIntent, SHOW_CART_REQUEST);
+        startActivity(cartIntent);
+    }
+
+    public void startOrdersActivity() {
+        Intent ordersIntent = new Intent(this, OrdersActivity.class);
+        startActivity(ordersIntent);
     }
 }

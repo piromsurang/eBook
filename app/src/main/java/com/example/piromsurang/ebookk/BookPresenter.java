@@ -84,4 +84,8 @@ public class BookPresenter implements Observer {
     public void addMoneyToUser(double amount) {
         user.addMoney(amount);
     }
+
+    public void createDialog(boolean b) {
+        view.createDialog(b);
+    }
 }
