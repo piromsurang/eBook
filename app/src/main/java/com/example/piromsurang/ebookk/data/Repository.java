@@ -10,4 +10,5 @@ public interface Repository {
     void loadData();
     ArrayList<Book> searchByTitle(String t);
     ArrayList<Book> searchByPublishedYear(String t);
+    Book getBookFromId(String id);
 }

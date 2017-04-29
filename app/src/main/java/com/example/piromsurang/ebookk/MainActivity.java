@@ -57,7 +57,6 @@ public class MainActivity extends AppCompatActivity implements BookView {
 
     @Override
     public void displayList(ArrayList<Book> books) {
-        ArrayAdapter<Book> adapter = new ArrayAdapter<Book>(this, android.R.layout.simple_list_item_1, books );
         MainCustomAdapter mainCustomAdapter = new MainCustomAdapter(books, presenter, this);
         ListView listView = (ListView) findViewById(R.id.show_list_listview);
         listView.setAdapter(mainCustomAdapter);

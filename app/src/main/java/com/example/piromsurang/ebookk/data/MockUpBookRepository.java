@@ -50,4 +50,9 @@ public class MockUpBookRepository extends Observable implements Repository {
     public ArrayList<Book> searchByPublishedYear(String t) {
         return null;
     }
+
+    @Override
+    public Book getBookFromId(String id) {
+        return null;
+    }
 }

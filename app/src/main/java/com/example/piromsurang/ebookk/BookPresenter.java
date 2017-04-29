@@ -25,6 +25,9 @@ public class BookPresenter implements Observer {
 
     public static final int SEARCH_BY_TITLE = 1;
     public static final int SEARCH_BY_PUBYEAR = 2;
+    public static final String PROMOTION_CODE = "promotion";
+    public static final String DOWNLOADBOOK_CODE = "download_book_details";
+    public static final String DOWNLOADIMAGE_CODE = "download_book_image";
 
     public BookPresenter( RealBookRepository repository, BookView view ) {
         this.repository = repository;
@@ -32,7 +35,6 @@ public class BookPresenter implements Observer {
         checkRadioButton = SEARCH_BY_TITLE;
         user = User.getInstance();
     }
-
 
     public void displayList(ArrayList<Book> b) {
         view.displayList(b);
@@ -69,8 +71,16 @@ public class BookPresenter implements Observer {
 
     @Override
     public void update(Observable o, Object arg) {
-        displayList(repository.getBookList());
-        System.out.println("updating data...");
+        System.out.println(arg.toString());
+        if(arg.toString().contains(PROMOTION_CODE)) {
+
+        } else if(arg.toString().contains(DOWNLOADBOOK_CODE)){
+            displayList(repository.getBookList());
+            System.out.println("updating data...");
+        } else if(arg.toString().contains(DOWNLOADIMAGE_CODE)) {
+            displayList(repository.getBookList());
+            System.out.println("updating image...");
+        }
     }
 
     public User getUser() {

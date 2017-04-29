@@ -58,8 +58,10 @@ public class MainCustomAdapter extends BaseAdapter implements ListAdapter {
         //Handle TextView and display string from your list
         TextView listItemText = (TextView) view.findViewById(R.id.list_item_string);
         listItemText.setText(list.get(position).toString());
-        ImageView imageView = (ImageView) view.findViewById(R.id.imageview_main);
-        imageView.setImageBitmap(RealBookRepository.getInstance().getBitmaps().get(position));
+        if(!RealBookRepository.getInstance().getBitmaps().isEmpty()) {
+            ImageView imageView = (ImageView) view.findViewById(R.id.imageview_main);
+            imageView.setImageBitmap(RealBookRepository.getInstance().getBitmaps().get(position));
+        }
 
         //Handle buttons and add onClickListeners
         Button addBtn = (Button)view.findViewById(R.id.add_btn);

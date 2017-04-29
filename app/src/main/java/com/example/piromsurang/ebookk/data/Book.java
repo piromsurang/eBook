@@ -2,26 +2,38 @@ package com.example.piromsurang.ebookk.data;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.widget.ImageView;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.Serializable;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLConnection;
+import java.util.ArrayList;
+import java.util.Observable;
+
+import static com.example.piromsurang.ebookk.BookPresenter.DOWNLOADIMAGE_CODE;
 
 /**
  * Created by Piromsurang on 4/20/2017 AD.
  */
 
-public class Book implements Serializable{
+public class Book extends Observable implements Serializable {
 
     private double price;
     private String img_url;
     private String id;
     private String title;
     private String pub_year;
-    private Bitmap bitmap;
+    protected Bitmap bitmap;
     private boolean isRefundable;
 
     public Book( double price, String img_url, String id, String title, String pub_year ) {
@@ -31,21 +43,23 @@ public class Book implements Serializable{
         this.title = title;
         this.pub_year = pub_year;
         isRefundable = false;
-        //downloadImage();
+        downloadImage();
     }
 
     public void downloadImage() {
-        URL url = null;
-        try {
-            url = new URL(img_url);
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
-        try {
-            bitmap = BitmapFactory.decodeStream(url.openConnection().getInputStream());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+//        URL url = null;
+//        try {
+//            url = new URL(img_url);
+//        } catch (MalformedURLException e) {
+//            e.printStackTrace();
+//        }
+//        try {
+//            bitmap = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+        ImageFetchTask task = new ImageFetchTask();
+        task.execute();
     }
 
     public void setRefundable(boolean isRefundables) {
@@ -98,6 +112,41 @@ public class Book implements Serializable{
 
     public String toString() {
         return "Title: " + title + "\nPublished Year: " + pub_year + "\nPrice: " + price + "\n";
+    }
+
+    public class ImageFetchTask extends AsyncTask<Void, Void, Bitmap > {
+
+        private Bitmap map;
+
+        @Override
+        protected Bitmap doInBackground(Void... params) {
+
+            return downloadImg();
+        }
+
+        private Bitmap downloadImg() {
+            URL url = null;
+            try {
+                url = new URL(img_url);
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            }
+            try {
+                map = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return map;
+        }
+
+        @Override
+        protected void onPostExecute(Bitmap results) {
+            if( results != null ) {
+                bitmap = results;
+            }
+            setChanged();
+            notifyObservers(getId());
+        }
     }
 
 }
