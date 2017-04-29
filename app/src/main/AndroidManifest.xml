@@ -18,9 +18,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".data.AddMoneyActivity" />
+        <activity android:name=".AddMoneyActivity" />
         <activity android:name=".CartActivity" />
-        <activity android:name=".OrdersActivity"></activity>
+        <activity android:name=".OrdersActivity" />
+        <activity android:name=".PromotionsActivity"></activity>
     </application>
 
 </manifest>

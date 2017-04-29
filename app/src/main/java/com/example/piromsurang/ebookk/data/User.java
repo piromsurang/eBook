@@ -1,11 +1,6 @@
-package com.example.piromsurang.ebookk;
-
-import android.graphics.Bitmap;
-
-import com.example.piromsurang.ebookk.data.Book;
+package com.example.piromsurang.ebookk.data;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 
 /**
  * Created by Piromsurang on 4/27/2017 AD.
@@ -83,13 +78,13 @@ public class User implements Serializable {
         return cart;
     }
 
-    public boolean refundBook(Book b) {
+    public int refundBook(Book b) {
         if( b.isRefundable() ) {
             cart.refundBook(b);
             money += b.getPrice();
-            return true;
+            return 1;
         } else {
-            return false;
+            return 2;
         }
     }
 }

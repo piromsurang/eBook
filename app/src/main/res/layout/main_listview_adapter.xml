@@ -15,19 +15,19 @@
         android:textStyle="bold" />
 
     <Button
-        android:id="@+id/add_btn"
+        android:id="@+id/add_btn_main"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:layout_marginRight="10dp"
-        android:text="Add" />
+        android:text="@string/add" />
 
     <ImageView
         android:id="@+id/imageview_main"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@id/add_btn"
+        android:layout_alignBottom="@id/add_btn_main"
         android:layout_centerInParent="true"/>
 
 

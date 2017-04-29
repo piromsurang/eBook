@@ -1,4 +1,4 @@
-package com.example.piromsurang.ebookk;
+package com.example.piromsurang.ebookk.adapter;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -12,6 +12,8 @@ import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.TextView;
 
+import com.example.piromsurang.ebookk.BookPresenter;
+import com.example.piromsurang.ebookk.R;
 import com.example.piromsurang.ebookk.data.Book;
 import com.example.piromsurang.ebookk.data.RealBookRepository;
 
@@ -59,8 +61,10 @@ public class OrdersCustomAdapter extends BaseAdapter implements ListAdapter {
         //Handle TextView and display string from your list
         TextView listItemText = (TextView)view.findViewById(R.id.list_item_string_orders);
         listItemText.setText(list.get(position).toString());
-        ImageView imageView = (ImageView) view.findViewById(R.id.imageview_orders);
-        imageView.setImageBitmap(RealBookRepository.getInstance().getBitmaps().get(position));
+        if(!list.get(position).getImg_url().equals("")) {
+            ImageView imageView = (ImageView) view.findViewById(R.id.imageview_orders);
+            imageView.setImageBitmap(RealBookRepository.getInstance().getBookFromId(list.get(position).getId()).getBitmap());
+        }
 
 
         //Handle buttons and add onClickListeners

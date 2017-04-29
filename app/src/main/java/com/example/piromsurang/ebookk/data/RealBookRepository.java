@@ -33,7 +33,6 @@ public class RealBookRepository extends Observable implements Repository, Observ
     private ArrayList<Bitmap> bitmaps;
     private ArrayList<PromotionBook> promotionBooks;
     private static RealBookRepository instance;
-    private int count = 0;
 
     public RealBookRepository() {
         books = new ArrayList<>();
@@ -51,6 +50,10 @@ public class RealBookRepository extends Observable implements Repository, Observ
             instance = new RealBookRepository();
         }
         return instance;
+    }
+
+    public ArrayList<PromotionBook> getPromotionBooks() {
+        return promotionBooks;
     }
 
     public ArrayList<Book> getBookList() {
@@ -133,6 +136,11 @@ public class RealBookRepository extends Observable implements Repository, Observ
         }
     }
 
+    public void loadPromotionBooks() {
+        PromotionBookFetcher fetcher = new PromotionBookFetcher();
+        fetcher.execute();
+    }
+
     public class BookFetcherTask extends AsyncTask<Void, Void, ArrayList<Book> > {
 
         @Override
@@ -186,6 +194,7 @@ public class RealBookRepository extends Observable implements Repository, Observ
                 }
                 setChanged();
                 notifyObservers(DOWNLOADBOOK_CODE);
+                loadPromotionBooks();
             }
         }
     }
@@ -242,7 +251,7 @@ public class RealBookRepository extends Observable implements Repository, Observ
         @Override
         protected void onPostExecute(ArrayList<PromotionBook> results) {
             if( results != null ) {
-                books.clear();
+                promotionBooks.clear();
                 for (PromotionBook t : results) {
                     promotionBooks.add(t);
                 }

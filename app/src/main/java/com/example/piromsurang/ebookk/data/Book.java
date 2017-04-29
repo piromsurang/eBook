@@ -26,7 +26,7 @@ import static com.example.piromsurang.ebookk.BookPresenter.DOWNLOADIMAGE_CODE;
  * Created by Piromsurang on 4/20/2017 AD.
  */
 
-public class Book extends Observable implements Serializable {
+public class Book extends Observable {
 
     private double price;
     private String img_url;
@@ -35,6 +35,7 @@ public class Book extends Observable implements Serializable {
     private String pub_year;
     protected Bitmap bitmap;
     private boolean isRefundable;
+    private boolean isPromotions;
 
     public Book( double price, String img_url, String id, String title, String pub_year ) {
         this.price = price;
@@ -43,23 +44,24 @@ public class Book extends Observable implements Serializable {
         this.title = title;
         this.pub_year = pub_year;
         isRefundable = false;
-        downloadImage();
+        isPromotions = false;
+
+        if( !img_url.equals("") ) {
+            downloadImage();
+        }
     }
 
     public void downloadImage() {
-//        URL url = null;
-//        try {
-//            url = new URL(img_url);
-//        } catch (MalformedURLException e) {
-//            e.printStackTrace();
-//        }
-//        try {
-//            bitmap = BitmapFactory.decodeStream(url.openConnection().getInputStream());
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
         ImageFetchTask task = new ImageFetchTask();
         task.execute();
+    }
+
+    public boolean isPromotions() {
+        return isPromotions;
+    }
+
+    public void setPromotions(boolean promotions) {
+        isPromotions = promotions;
     }
 
     public void setRefundable(boolean isRefundables) {

@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.piromsurang.ebookk.adapter.OrdersCustomAdapter;
 import com.example.piromsurang.ebookk.data.Book;
 import com.example.piromsurang.ebookk.data.RealBookRepository;
 
@@ -54,8 +55,8 @@ public class OrdersActivity extends AppCompatActivity implements BookView {
     }
 
     @Override
-    public void createDialog(boolean b) {
-        if(b) {
+    public void createDialog(int b) {
+        if(b == 1) {
             createRefundableDialog();
         } else {
             createUnrefundableDialog();

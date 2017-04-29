@@ -10,5 +10,5 @@ import java.util.ArrayList;
 
 public interface BookView {
     void displayList(ArrayList<Book> books);
-    void createDialog(boolean b);
+    void createDialog(int b);
 }

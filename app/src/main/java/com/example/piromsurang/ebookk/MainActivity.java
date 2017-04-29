@@ -18,7 +18,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 
-import com.example.piromsurang.ebookk.data.AddMoneyActivity;
+import com.example.piromsurang.ebookk.adapter.MainCustomAdapter;
 import com.example.piromsurang.ebookk.data.Book;
 import com.example.piromsurang.ebookk.data.RealBookRepository;
 
@@ -38,8 +38,12 @@ public class MainActivity extends AppCompatActivity implements BookView {
     private final String ADD_FUND = "Add Fund";
     private final String CART = "Cart";
     private final String ORDER = "Orders";
+    private final String PROMOTION = "Promotions";
     public static final String AMOUNT_ADD_FUND = "adding_fund_amount_key";
     public static final int ADDING_FUND_REQUEST = 1;
+    public static final int ORDER_PAGE_REQUEST = 2;
+    public static final int CART_PAGE_REQUEST = 3;
+    public static final int PROMOTION_PAGE_REQUEST = 4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +67,7 @@ public class MainActivity extends AppCompatActivity implements BookView {
     }
 
     @Override
-    public void createDialog(boolean b) {
+    public void createDialog(int b) {
         AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
         alertDialog.setTitle("Check Fund");
         String value = String.format("%.2f", presenter.getUser().getMoney());
@@ -87,13 +91,15 @@ public class MainActivity extends AppCompatActivity implements BookView {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String selectedItem = parent.getItemAtPosition(position).toString();
                 if(selectedItem.contains(CHECK_FUND)) {
-                    presenter.createDialog(true);
+                    presenter.createDialog(1);
                 } else if(selectedItem.contains(ADD_FUND)) {
                     startAddingFund();
                 } else if(selectedItem.contains(CART)) {
                     startCartActivity();
                 } else if(selectedItem.contains(ORDER)) {
                     startOrdersActivity();
+                } else if(selectedItem.contains(PROMOTION)) {
+                    startPromotionsActivity();
                 }
                 parent.setSelection(0);
             }
@@ -146,10 +152,6 @@ public class MainActivity extends AppCompatActivity implements BookView {
         }
     }
 
-    public void initializePopupWindow(View view) {
-
-    }
-
     public void startAddingFund() {
         Intent addFundIntent = new Intent(this, AddMoneyActivity.class );
         startActivityForResult(addFundIntent, ADDING_FUND_REQUEST);
@@ -173,5 +175,10 @@ public class MainActivity extends AppCompatActivity implements BookView {
     public void startOrdersActivity() {
         Intent ordersIntent = new Intent(this, OrdersActivity.class);
         startActivity(ordersIntent);
+    }
+
+    public void startPromotionsActivity() {
+        Intent promotionsIntent = new Intent(this, PromotionsActivity.class);
+        startActivity(promotionsIntent);
     }
 }

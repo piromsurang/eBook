@@ -1,8 +1,9 @@
-package com.example.piromsurang.ebookk;
+package com.example.piromsurang.ebookk.data;
 
 import android.os.CountDownTimer;
 
 import com.example.piromsurang.ebookk.data.Book;
+import com.example.piromsurang.ebookk.data.PromotionBook;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -59,6 +60,7 @@ public class Cart implements Serializable {
         double sum = 0;
         for(Book b : selectedBooks) {
             sum += b.getPrice();
+
         }
         return sum;
     }

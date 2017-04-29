@@ -1,6 +1,7 @@
-package com.example.piromsurang.ebookk;
+package com.example.piromsurang.ebookk.adapter;
 
 import android.content.Context;
+import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,8 @@ import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.TextView;
 
+import com.example.piromsurang.ebookk.BookPresenter;
+import com.example.piromsurang.ebookk.R;
 import com.example.piromsurang.ebookk.data.Book;
 import com.example.piromsurang.ebookk.data.RealBookRepository;
 
@@ -19,16 +22,16 @@ import java.util.ArrayList;
  * Created by Piromsurang on 4/27/2017 AD.
  */
 
-public class CartCustomAdapter extends BaseAdapter implements ListAdapter {
+public class MainCustomAdapter extends BaseAdapter implements ListAdapter {
 
     private ArrayList<Book> list = new ArrayList<>();
     private Context context;
     private BookPresenter presenter;
 
-    public CartCustomAdapter(ArrayList<Book> list, BookPresenter presenter, Context context) {
+    public MainCustomAdapter(ArrayList<Book> list, BookPresenter presenter, Context context) {
         this.list = list;
-        this.context = context;
         this.presenter = presenter;
+        this.context = context;
     }
 
     @Override
@@ -51,24 +54,24 @@ public class CartCustomAdapter extends BaseAdapter implements ListAdapter {
         View view = convertView;
         if (view == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            view = inflater.inflate(R.layout.cart_listview_adapter, null);
+            view = inflater.inflate(R.layout.main_listview_adapter, null);
         }
 
         //Handle TextView and display string from your list
-        TextView listItemText = (TextView)view.findViewById(R.id.list_item_string_cart);
+        TextView listItemText = (TextView) view.findViewById(R.id.list_item_string);
         listItemText.setText(list.get(position).toString());
-        ImageView imageView = (ImageView) view.findViewById(R.id.imageview_cart);
-        imageView.setImageBitmap(RealBookRepository.getInstance().getBitmaps().get(position));
-
+        if(!RealBookRepository.getInstance().getBitmaps().isEmpty()) {
+            ImageView imageView = (ImageView) view.findViewById(R.id.imageview_main);
+            imageView.setImageBitmap(RealBookRepository.getInstance().getBookFromId(list.get(position).getId()).getBitmap());
+        }
 
         //Handle buttons and add onClickListeners
-        Button addBtn = (Button)view.findViewById(R.id.delete_btn);
+        Button addBtn = (Button)view.findViewById(R.id.add_btn_main);
 
         addBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                presenter.getUser().removeFromCart(list.get(position));
-                presenter.displayList(list);
+                presenter.getUser().addToCart(list.get(position));
             }
         });
 

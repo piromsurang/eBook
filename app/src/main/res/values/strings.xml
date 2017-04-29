@@ -10,6 +10,7 @@
         <item>Add Fund</item>
         <item>Cart</item>
         <item>Orders</item>
+        <item>Promotions</item>
     </string-array>
     <string name="money">Money</string>
     <string name="dismiss">Dismiss</string>
@@ -25,4 +26,6 @@
     <string name="order">Orders</string>
     <string name="back">BACK</string>
     <string name="refund">REFUND</string>
+    <string name="promotions">Promotions</string>
+    <string name="add">ADD</string>
 </resources>

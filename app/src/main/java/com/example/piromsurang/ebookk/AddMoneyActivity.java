@@ -1,4 +1,4 @@
-package com.example.piromsurang.ebookk.data;
+package com.example.piromsurang.ebookk;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -27,6 +27,13 @@ public class AddMoneyActivity extends AppCompatActivity {
         double amount = Double.parseDouble(editText.getText().toString());
         Intent data = new Intent();
         data.putExtra(AMOUNT_ADD_FUND, amount);
+        setResult(RESULT_OK, data);
+        finish();
+    }
+
+    public void cancel(View view) {
+        Intent data = new Intent();
+        data.putExtra(AMOUNT_ADD_FUND, 0);
         setResult(RESULT_OK, data);
         finish();
     }

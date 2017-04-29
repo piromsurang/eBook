@@ -2,13 +2,13 @@ package com.example.piromsurang.ebookk;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.piromsurang.ebookk.adapter.CartCustomAdapter;
 import com.example.piromsurang.ebookk.data.Book;
 import com.example.piromsurang.ebookk.data.RealBookRepository;
 
@@ -46,9 +46,9 @@ public class CartActivity extends AppCompatActivity implements BookView {
     public void proceedCheckout(View view) {
 
         if(presenter.getUser().getMoney() < presenter.getTotal() ) {
-            presenter.createDialog(false);
+            presenter.createDialog(2);
         } else {
-            presenter.createDialog(true);
+            presenter.createDialog(1);
         }
 
     }
@@ -63,10 +63,10 @@ public class CartActivity extends AppCompatActivity implements BookView {
     }
 
     @Override
-    public void createDialog(boolean b) {
-        if(b) {
+    public void createDialog(int b) {
+        if(b == 1) {
             createAbleToProceedDialog();
-        } else {
+        } else if(b == 2) {
             createUnableToProceedDialog();
         }
     }

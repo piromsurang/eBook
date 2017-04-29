@@ -1,12 +1,9 @@
 package com.example.piromsurang.ebookk;
 
-import android.widget.ArrayAdapter;
-
 import com.example.piromsurang.ebookk.data.Book;
-import com.example.piromsurang.ebookk.data.MockUpBookRepository;
 import com.example.piromsurang.ebookk.data.RealBookRepository;
+import com.example.piromsurang.ebookk.data.User;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
@@ -71,9 +68,8 @@ public class BookPresenter implements Observer {
 
     @Override
     public void update(Observable o, Object arg) {
-        System.out.println(arg.toString());
         if(arg.toString().contains(PROMOTION_CODE)) {
-
+            System.out.println("updating promotion book...");
         } else if(arg.toString().contains(DOWNLOADBOOK_CODE)){
             displayList(repository.getBookList());
             System.out.println("updating data...");
@@ -95,7 +91,7 @@ public class BookPresenter implements Observer {
         user.addMoney(amount);
     }
 
-    public void createDialog(boolean b) {
+    public void createDialog(int b) {
         view.createDialog(b);
     }
 }
