@@ -63,6 +63,13 @@ public class MainCustomAdapter extends BaseAdapter implements ListAdapter {
         if(!RealBookRepository.getInstance().getBitmaps().isEmpty()) {
             ImageView imageView = (ImageView) view.findViewById(R.id.imageview_main);
             imageView.setImageBitmap(RealBookRepository.getInstance().getBookFromId(list.get(position).getId()).getBitmap());
+            imageView.setClickable(true);
+            imageView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    presenter.createDialog(position);
+                }
+            });
         }
 
         //Handle buttons and add onClickListeners

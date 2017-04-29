@@ -27,8 +27,8 @@
         android:id="@+id/imageview_main"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@id/add_btn_main"
-        android:layout_centerInParent="true"/>
+        android:layout_centerInParent="true"
+        android:layout_alignTop="@id/list_item_string"/>
 
 
 </RelativeLayout>

@@ -41,9 +41,6 @@ public class MainActivity extends AppCompatActivity implements BookView {
     private final String PROMOTION = "Promotions";
     public static final String AMOUNT_ADD_FUND = "adding_fund_amount_key";
     public static final int ADDING_FUND_REQUEST = 1;
-    public static final int ORDER_PAGE_REQUEST = 2;
-    public static final int CART_PAGE_REQUEST = 3;
-    public static final int PROMOTION_PAGE_REQUEST = 4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,8 +63,7 @@ public class MainActivity extends AppCompatActivity implements BookView {
         listView.setAdapter(mainCustomAdapter);
     }
 
-    @Override
-    public void createDialog(int b) {
+    public void createCheckFundDialog() {
         AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
         alertDialog.setTitle("Check Fund");
         String value = String.format("%.2f", presenter.getUser().getMoney());
@@ -81,6 +77,30 @@ public class MainActivity extends AppCompatActivity implements BookView {
         alertDialog.show();
     }
 
+    public void createInformationDialog(int position) {
+        AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
+        alertDialog.setTitle("Book Information");
+        Book b = repository.getBookList().get(position);
+        String value = String.format("Title: %s \nPrice: %.2f \nPublished Year: %s", b.getTitle(), b.getPrice(), b.getPub_year());
+        alertDialog.setMessage(value);
+        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "DISMISS",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+        alertDialog.show();
+    }
+
+    @Override
+    public void createDialog(int b) {
+        if(b == -1) {
+            createCheckFundDialog();
+        } else {
+            createInformationDialog(b);
+        }
+    }
+
     public void initializeSpinner() {
         Spinner spinner = (Spinner) findViewById(R.id.account_spinner);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.account_array, android.R.layout.simple_spinner_item);
@@ -91,7 +111,7 @@ public class MainActivity extends AppCompatActivity implements BookView {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String selectedItem = parent.getItemAtPosition(position).toString();
                 if(selectedItem.contains(CHECK_FUND)) {
-                    presenter.createDialog(1);
+                    presenter.createDialog(-1);
                 } else if(selectedItem.contains(ADD_FUND)) {
                     startAddingFund();
                 } else if(selectedItem.contains(CART)) {
