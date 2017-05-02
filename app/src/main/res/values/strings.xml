@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">eBookk</string>
+    <string name="app_name">eBooks</string>
     <string name="list_books">List of Books</string>
     <string name="search_by">Search By : </string>
     <string name="title">Title</string>

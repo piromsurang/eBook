@@ -17,6 +17,8 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 
 import static com.example.piromsurang.ebookk.BookPresenter.DOWNLOADBOOK_CODE;
 import static com.example.piromsurang.ebookk.BookPresenter.DOWNLOADIMAGE_CODE;
@@ -219,7 +221,7 @@ public class RealBookRepository extends Observable implements Repository, Observ
                                                             bookJson.getDouble("price"),
                                                             bookJson.getJSONArray("book_ids"));
                     for(int k = 0 ; k < book.getB().length() ; k++ ) {
-                        String id = book.getB().getString(i);
+                        String id = book.getB().getString(k);
                         book.addBook(getBookFromId(id));
                     }
                     results.add(book);

@@ -31,8 +31,6 @@ public class MainActivity extends AppCompatActivity implements BookView {
 
     private BookPresenter presenter;
     private RealBookRepository repository;
-    private PopupWindow popupWindow;
-    private LayoutInflater layoutInflater;
 
     private final String CHECK_FUND = "Check Fund";
     private final String ADD_FUND = "Add Fund";
