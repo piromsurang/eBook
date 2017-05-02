@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.piromsurang.ebookk.adapter.PromotionsCustomAdapter;
@@ -27,7 +28,6 @@ public class PromotionsActivity extends AppCompatActivity implements BookView {
         repository = RealBookRepository.getInstance();
         presenter = new BookPresenter(repository, this);
         initializeListview();
-        initializeShowMoney();
     }
 
     private void initializeListview() {
@@ -61,12 +61,6 @@ public class PromotionsActivity extends AppCompatActivity implements BookView {
                     }
                 });
         alertDialog.show();
-    }
-
-    public void initializeShowMoney() {
-        TextView textView = (TextView) findViewById(R.id.show_amount_user_textview_promotions);
-        String text = String.format("%.2f", presenter.getUser().getMoney());
-        textView.setText(text);
     }
 
 }

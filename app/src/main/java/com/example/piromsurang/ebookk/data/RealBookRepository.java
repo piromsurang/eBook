@@ -2,6 +2,9 @@ package com.example.piromsurang.ebookk.data;
 
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
+import android.widget.ProgressBar;
+
+import com.example.piromsurang.ebookk.PromotionsActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -224,6 +227,7 @@ public class RealBookRepository extends Observable implements Repository, Observ
                         String id = book.getB().getString(k);
                         book.addBook(getBookFromId(id));
                     }
+
                     results.add(book);
                 }
             } catch (JSONException e) {

@@ -45,7 +45,9 @@ public class CartActivity extends AppCompatActivity implements BookView {
 
     public void proceedCheckout(View view) {
 
-        if(presenter.getUser().getMoney() < presenter.getTotal() ) {
+        if(presenter.getUser().getMoney() == 0 ) {
+            presenter.createDialog(3);
+        } else if(presenter.getUser().getMoney() < presenter.getTotal() ) {
             presenter.createDialog(2);
         } else {
             presenter.createDialog(1);
@@ -68,7 +70,22 @@ public class CartActivity extends AppCompatActivity implements BookView {
             createAbleToProceedDialog();
         } else if(b == 2) {
             createUnableToProceedDialog();
+        } else if(b == 3){
+            createFundIsZeroDialog();
         }
+    }
+
+    public void createFundIsZeroDialog() {
+        AlertDialog alertDialog = new AlertDialog.Builder(CartActivity.this).create();
+        alertDialog.setTitle("Checkout Error");
+        alertDialog.setMessage("Sorry, your money is zero.");
+        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "DISMISS",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+        alertDialog.show();
     }
 
     public void createUnableToProceedDialog() {

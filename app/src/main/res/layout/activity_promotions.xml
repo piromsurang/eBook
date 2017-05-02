@@ -35,33 +35,12 @@
         android:text="@string/list_books"
         android:textAlignment="center"/>
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.00">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/total"
-            tools:ignore="NestedWeights"
-            android:textAlignment="center"/>
-
-        <TextView
-            android:id="@+id/show_total_amount_promotions"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"/>
-
-    </LinearLayout>
-
     <ListView
         android:id="@+id/promotions_listview"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="11.11"></ListView>
+
 
     <LinearLayout
         android:orientation="horizontal"
