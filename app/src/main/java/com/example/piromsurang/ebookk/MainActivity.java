@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity implements BookView {
         AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
         alertDialog.setTitle("Book Information");
         Book b = repository.getBookList().get(position);
-        String value = String.format("Title: %s \nPrice: %.2f \nPublished Year: %s", b.getTitle(), b.getPrice(), b.getPub_year());
+        String value = String.format("ID: %s \nTitle: %s \nPrice: %.2f \nPublished Year: %s", b.getId(), b.getTitle(), b.getPrice(), b.getPub_year());
         alertDialog.setMessage(value);
         alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "DISMISS",
                 new DialogInterface.OnClickListener() {

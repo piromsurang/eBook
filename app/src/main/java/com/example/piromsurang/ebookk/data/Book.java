@@ -113,7 +113,7 @@ public class Book extends Observable {
     public void setPub_year(String pub_year) { this.pub_year = pub_year; }
 
     public String toString() {
-        return "Title: " + title + "\nPublished Year: " + pub_year + "\nPrice: " + price + "\n";
+        return "Title: " + title + "\n";
     }
 
     public class ImageFetchTask extends AsyncTask<Void, Void, Bitmap > {

@@ -33,7 +33,7 @@ public class AddMoneyActivity extends AppCompatActivity {
 
     public void cancel(View view) {
         Intent data = new Intent();
-        data.putExtra(AMOUNT_ADD_FUND, 0);
+        data.putExtra(AMOUNT_ADD_FUND, 0.0);
         setResult(RESULT_OK, data);
         finish();
     }

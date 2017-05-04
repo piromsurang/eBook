@@ -1,17 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+
+    <ImageView
+        android:id="@+id/imageview_main"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:paddingLeft="8dp"/>
 
     <TextView
         android:id="@+id/list_item_string"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:layout_alignParentLeft="true"
+        android:layout_centerInParent="true"
+        android:layout_toRightOf="@+id/imageview_main"
+        android:layout_toLeftOf="@+id/add_btn_main"
         android:paddingLeft="8dp"
-        android:textSize="18sp"
+        android:textSize="12sp"
         android:textStyle="bold" />
 
     <Button
@@ -22,13 +32,6 @@
         android:layout_centerVertical="true"
         android:layout_marginRight="10dp"
         android:text="@string/add" />
-
-    <ImageView
-        android:id="@+id/imageview_main"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:layout_alignTop="@id/list_item_string"/>
 
 
 </RelativeLayout>
